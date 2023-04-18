@@ -118,11 +118,17 @@ instance (HasMock a context, HasMock b context) => HasMock (a :<|> b) context wh
 instance (KnownSymbol path, HasMock rest context) => HasMock (path :> rest) context where
   mock _ = mock (Proxy :: Proxy rest)
 
-instance (KnownSymbol s, FromHttpApiData a, HasMock rest context, SBoolI (FoldLenient mods)) => HasMock (Capture' mods s a :> rest) context where
-  mock _ context = \_ -> mock (Proxy :: Proxy rest) context
-
-instance (KnownSymbol s, FromHttpApiData a, HasMock rest context) => HasMock (CaptureAll s a :> rest) context where
-  mock _ context = \_ -> mock (Proxy :: Proxy rest) context
+-- ------------------------------------------------------------------------------------------------------------
+-- CHANGE: COMMENT DUE TO FAILURE
+-- ------------------------------------------------------------------------------------------------------------
+--instance (KnownSymbol s, FromHttpApiData a, HasMock rest context, SBoolI (FoldLenient mods)) => HasMock (Capture' mods s a :> rest) context where
+--  mock _ context = \_ -> mock (Proxy :: Proxy rest) context
+--
+--instance (KnownSymbol s, FromHttpApiData a, HasMock rest context) => HasMock (CaptureAll s a :> rest) context where
+--  mock _ context = \_ -> mock (Proxy :: Proxy rest) context
+-- ------------------------------------------------------------------------------------------------------------
+-- END OF CHANGE
+-- ------------------------------------------------------------------------------------------------------------
 
 instance (AllCTUnrender ctypes a, HasMock rest context, SBoolI (FoldLenient mods))
     => HasMock (ReqBody' mods ctypes a :> rest) context where

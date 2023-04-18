@@ -1,12 +1,5 @@
-resolver: nightly-2016-10-07
+resolver: nightly-2023-04-05
 packages:
 - '.'
-extra-deps:
-- hspec-wai-0.8.0
-- hspec-expectations-0.8.0
-- call-stack-0.1.0
-- hspec-2.3.1
-- hspec-discover-2.3.1
-- hspec-core-2.3.1
-flags: {}
-extra-package-dbs: []
+
+allow-newer: true
